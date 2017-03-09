@@ -57,7 +57,8 @@ sensor_calls_and_args = [
     ("is_media_playing", ()),
     ("is_tts_speaking", ()),
     # The notation ("...",) makes a 1-element tuple out of the enclosed string
-    ("tts_speak", ("This is your device's text-to-speech interface speaking.",)),
+    ("tts_speak", ("Normally, you cannot make the phone speak."
+        "We only enable the text-to-speech interface at demo time!",)),
     ("get_location", ()),
     ("get_lastknown_location", ()),
     ("get_geolocation", (48.03, 16.49, 10)),
