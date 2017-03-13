@@ -1,0 +1,26 @@
+'''
+echo_msg.r2py -- a simple script that echoes command line arguments using text to speech function
+
+This program takes command line arguments and uses to the text to speech function to speak the 
+arguments to the phone. If no arguments passed then it echoes no arguments passed
+
+To run this script: run echo_msg.r2py arg1 arg2 arg3 ....
+'''
+
+# Global variable to store the caller arguments
+mycontext["arguments"] = callargs;
+
+# Function to pop the next argument from the arguments list
+def get_arg():
+    if len(mycontext["arguments"]) != 0:
+        return mycontext["arguments"].pop(0)
+
+# Main loop
+while len(mycontext["arguments"]) != 0:
+    tts_speak("echo argument, "+get_arg())
+
+# Final message
+tts_speak("echo argument, no more arguments to speak")
+
+    
+    
