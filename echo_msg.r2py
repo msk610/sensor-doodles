@@ -18,6 +18,7 @@ def get_arg():
 # Main loop
 while len(mycontext["arguments"]) != 0:
     tts_speak("echo argument, "+get_arg())
+    sleep(2)
 
 # Final message
 tts_speak("echo argument, no more arguments to speak")
