@@ -1,0 +1,53 @@
+# While cycle that allow the program to run "forever"
+while True:
+
+  # Gets info about surroundings Wi-Fis
+  buffer = None
+  buffer_ssid = None
+  wifi_info_list = get_wifi_scan_info()
+
+  # Gets info about Wi-Fi currencly connected to
+  wifi_curr = get_wifi_connection_info()
+  rssi_curr = wifi_curr["rssi"]
+  ssid_curr = wifi_curr["ssid"]
+
+  max_rssi = rssi_curr
+  max_ssid = ssid_curr
+
+  # Analyses data of every surrounding Wi-Fi
+  for wifi_info in wifi_info_list:
+    rssi = wifi_info["rssi"]
+    ssid = wifi_info["ssid"]
+    mac = wifi_info["bssid"]
+    log(ssid, ": ", rssi, "\n")
+
+    # Compares rssis of Wi-Fis
+    if max_rssi >= rssi:
+      max_rssi = rssi_curr
+      max_ssid = ssid_curr
+      max_rssi = buffer
+      max_ssid = buffer_ssid
+    else:
+      max_rssi = rssi
+    max_ssid = ssid
+      buffer = max_rssi
+      buffer_ssid = max_ssid
+
+  max_rssi = buffer
+  max_ssid = buffer_ssid
+  log(max_ssid, ": ", buffer, "\n", "\n", "\n")
+
+  # Writes the best hotspot
+  log("\n" "The best hotspot to connect to is: ", max_rssi, " " , max_ssid,"\n")
+
+  # Speaks the best hotspot
+  network_name = max_ssid.replace("_"," ")
+  tts_speak("The best hotspot to connect to")
+  sleep(2)
+  tts_speak ("is")
+  sleep(1)
+  tts_speak (str(network_name))
+  notify(str(max_ssid))
+
+  # The whole cycle is re-played every 10 seconds
+  sleep(10)
